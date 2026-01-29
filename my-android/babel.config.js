@@ -1,12 +1,13 @@
 module.exports = function (api) {
-  api.cache(true);
-  return {
-    presets: [
-      ["babel-preset-expo", { jsxImportSource: "nativewind" }],
-      "nativewind/babel",
-    ],
-    plugins: [
-      "react-native-reanimated/plugin", // ЗАЛИШ ТІЛЬКИ ЦЕ (має бути останнім)
-    ],
-  };
+    api.cache(true);
+    return {
+        presets: [
+            ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+            "nativewind/babel",
+        ],
+        plugins: [
+            // ВАЖЛИВО: цей плагін має бути останнім
+            "react-native-reanimated/plugin",
+        ],
+    };
 };
