@@ -17,7 +17,7 @@ export default function NotFoundScreen() {
               Сторінку не знайдено
             </Text>
 
-            <Link href="/(auth)" asChild>
+            <Link href="/" asChild>
               <TouchableOpacity className="mt-8 bg-emerald-500 px-8 py-4 rounded-2xl">
                 <Text className="text-white font-bold">На головну</Text>
               </TouchableOpacity>

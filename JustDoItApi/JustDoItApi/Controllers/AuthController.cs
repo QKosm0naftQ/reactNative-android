@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JustDoItApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class AuthController(IAuthService authService) : ControllerBase
 {
     [HttpPost("login")]
@@ -14,17 +14,16 @@ public class AuthController(IAuthService authService) : ControllerBase
         string result = await authService.LoginAsync(model);
         if (string.IsNullOrEmpty(result))
         {
-            return BadRequest(new
-            {
-                Status = 400,
-                IsValid = false,
-                Errors = new { Email = "Невірний логін або пароль" }
-            });
+            return BadRequest(
+                new
+                {
+                    Status = 400,
+                    IsValid = false,
+                    Errors = new { Email = "Невірний логін або пароль" },
+                }
+            );
         }
-        return Ok(new
-        {
-            Token = result
-        });
+        return Ok(new { Token = result });
     }
 
     [HttpPost("register")]
@@ -33,16 +32,15 @@ public class AuthController(IAuthService authService) : ControllerBase
         string result = await authService.RegisterAsync(model);
         if (string.IsNullOrEmpty(result))
         {
-            return BadRequest(new
-            {
-                Status = 400,
-                IsValid = false,
-                Errors = new { Email = "Щось пішло не так " }
-            });
+            return BadRequest(
+                new
+                {
+                    Status = 400,
+                    IsValid = false,
+                    Errors = new { Email = "Щось пішло не так " },
+                }
+            );
         }
-        return Ok(new
-        {
-            Token = result
-        });
+        return Ok(new { Token = result });
     }
 }

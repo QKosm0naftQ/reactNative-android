@@ -17,13 +17,6 @@ export default function AuthTabsLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
-        options={{
-          title: "Головна",
-          // Тут потім можна додати іконки
-        }}
-      />
-      <Tabs.Screen
         name="login"
         options={{
           title: "Вхід",
