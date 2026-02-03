@@ -34,14 +34,14 @@
         }
 
         async function join() {
-            await connection.invoke("JoinChat", 2);
-            log("👥 Joined chat");
+          await connection.invoke("JoinChat", 1);
+          log("👥 Joined chat");
         }
 
         async function send() {
             await connection.invoke("SendMessage", {
-                chatId: 2,
-                message: "Привіт з браузера"
+                chatId: 1,
+                message: text
             });
         }
     </script>
