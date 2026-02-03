@@ -1,12 +1,13 @@
-﻿using AutoMapper;
+﻿using System.Data;
+using System.Text.Json;
+using AutoMapper;
 using JustDoItApi.Constants;
+using JustDoItApi.Entities.Chat;
 using JustDoItApi.Entities.Identity;
 using JustDoItApi.Interfaces;
 using JustDoItApi.Models.Seeder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
-using System.Text.Json;
 
 namespace JustDoItApi.Data;
 
@@ -41,7 +42,12 @@ public static class DbSeeder
         if (!userManager.Users.Any())
         {
             var imageService = scope.ServiceProvider.GetRequiredService<IImageService>();
-            var jsonFile = Path.Combine(Directory.GetCurrentDirectory(), "Helpers", "JsonData", "Users.json");
+            var jsonFile = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "Helpers",
+                "JsonData",
+                "Users.json"
+            );
             if (File.Exists(jsonFile))
             {
                 var jsonData = await File.ReadAllTextAsync(jsonFile);
@@ -71,7 +77,6 @@ public static class DbSeeder
                             }
                         }
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -82,6 +87,14 @@ public static class DbSeeder
             {
                 Console.WriteLine("Not Found File Categories.json");
             }
+        }
+
+        if (!context.ChatTypes.Any())
+        {
+            var types = ChatTypes.All.Select(x => new ChatTypeEntity { TypeName = x }).ToList();
+
+            context.ChatTypes.AddRange(types);
+            await context.SaveChangesAsync();
         }
     }
 }
